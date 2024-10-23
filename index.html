@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <title>Основы Vue</title>
+        <link
+            rel="stylesheet"
+            href="theme.css"
+        />
+    </head>
+    <body>
+        <div
+            class="container"
+            id="app"
+        >
+            <div class="card">
+                <h1>План по изучению Vue.js</h1>
+
+                <div class="steps">
+                    <div class="steps-content">{{currentText}}</div>
+                    <ul class="steps-list">
+                        <li
+                            class="steps-item"
+                            @click="setActive(idx)"
+                            v-for="(step, idx) in steps"
+                            :key="idx"
+                        >
+                            <span
+                                :style="{ backgroundColor: idx <= activeIndex  ? '#42b983' : '#cccccc' }"
+                                >{{idx+1}}</span
+                            >{{" "+step.title}}
+                        </li>
+                    </ul>
+                    <div>
+                        <button
+                            class="btn primary"
+                            v-if="isBtnBack"
+                            :style="{backgroundColor:activeIndex===0?'#cccccc':'#42b983'}"
+                            @click="prev()"
+                        >
+                            Назад
+                        </button>
+                        <button
+                            class="btn primary"
+                            v-if="isBtnNext"
+                            @click="next()"
+                        >
+                            Вперед
+                        </button>
+                        <button
+                            class="btn primary"
+                            @click="finish()"
+                            v-if="isFinish"
+                        >
+                            Завершить
+                        </button>
+                        <button
+                            class="btn primary"
+                            v-if="isReset"
+                            @click="reset"
+                        >
+                            Начать заново
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script src="/vue.js"></script>
+    </body>
+</html>
